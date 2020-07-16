@@ -54,7 +54,7 @@ ball - move
 Links
 
 Trello
-(Trello link)
+https://trello.com/b/xoXufWLT/space-ball
 
 Git
 (URls for the project repo and deploy Link Repo Link Deploy)
