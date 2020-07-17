@@ -1,0 +1,22 @@
+button {
+    width: 280px;
+    height: 75px;
+    border-radius: 10px;
+    background-color: rgb(133, 162, 173);
+    font-family: monospace;
+    font-size: 30px;
+}
+
+.highScores {
+    position: relative;
+    color: #f1f1f1;
+    top: 25px;
+    left: 1350px;
+    font-family: monospace;
+}
+
+.hallOfFame {
+    font-size: 30px;
+    font-weight: 600;
+
+}
