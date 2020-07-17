@@ -2,7 +2,7 @@ let canvas = document.querySelector("#myCanvas")
 canvas.style.backgroundColor = "#0d3440"
 
 let ctx = canvas.getContext("2d");
-// to test
+
 let score = 0;
 let intervalId = 0;
 

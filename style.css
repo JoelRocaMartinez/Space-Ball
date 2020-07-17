@@ -1,3 +1,48 @@
+canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 10%;
+}
+
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+#audioControls {
+    position: absolute;
+    bottom: 40px;
+}
+
+.content {
+    position: fixed;
+    left: 35%;
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+    font-size: 50px;
+    top: 5%;
+    text-decoration: underline;
+}
+
+.selectMode {
+    position: relative;
+    color: #f1f1f1;
+    top: 450px;
+    left: 400px;
+    font-family: monospace;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column; 
+    
+}
+
 button {
     width: 280px;
     height: 75px;
