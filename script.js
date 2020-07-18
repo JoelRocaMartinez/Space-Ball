@@ -11,9 +11,15 @@ let isLeftArrow = false;
 let isUpArrow = false;
 let isDownArrow = false;
 
+let ball1Xincrement = 3
+let ball1Ydecrement = - 3
+
+let ball2Xdecrement = - 3
+let ball2Yincrement = 3
+
 // Ball 1 variables
-let ball1X = 250;
-let ball1Y = 250;
+let ball1X = 230;
+let ball1Y = 230;
 
 let ballRadius = 10;
 // Ball 2 variables
@@ -21,14 +27,14 @@ let ball2X = 200;
 let ball2Y = 200;
 
 // Paddle Bot variables
-let paddleBotX = 150
-let paddleBotWidth = 200
-let paddleBotHeight = 20
+let paddleBotX = 150;
+let paddleBotWidth = 200;
+let paddleBotHeight = 20;
 
 //Paddle Side variables
-let paddleSideY = 150
-let paddleSideWidth = 20
-let paddleSideHeight = 200
+let paddleSideY = 150;
+let paddleSideWidth = 20;
+let paddleSideHeight = 200;
 
 // Ball 1
 function createBall1() {
@@ -38,7 +44,7 @@ function createBall1() {
   ctx.stroke();
   ctx.fill();
   ctx.closePath();
-}
+};
 
 // Ball 2
 function createBall2() {
@@ -48,24 +54,24 @@ function createBall2() {
   ctx.stroke();
   ctx.fill();
   ctx.closePath();
-}
+};
 
 
 // Paddle Bot
 function createPaddleBot() {
   ctx.beginPath();
-  ctx.fillStyle = "white";
+  ctx.fillStyle = "#c7c7c7";
   ctx.fillRect(paddleBotX, (canvas.height - paddleBotHeight) - 10, paddleBotWidth, paddleBotHeight);
   ctx.closePath();
-}
+};
 
 // Paddle Side
 function createPaddleSide() {
   ctx.beginPath();
-  ctx.fillStyle = "white";
+  ctx.fillStyle = "#c7c7c7";
   ctx.fillRect((canvas.width - paddleSideWidth) -10, paddleSideY, paddleSideWidth, paddleSideHeight);
   ctx.closePath();
-}
+};
 
 
 document.addEventListener('keydown', function(event){
@@ -86,14 +92,15 @@ document.addEventListener('keydown', function(event){
     isUpArrow = false;
   }
 
-})
+});
 
 document.addEventListener('keyup', function(event){
   isRightArrow = false;
   isLeftArrow = false;
   isUpArrow = false;
   isDownArrow = false;
-})
+});
+
 
 // Paddle movement
 function paddleMovement() {
@@ -105,12 +112,44 @@ function paddleMovement() {
   }
   if (isUpArrow && paddleSideY > 0) {
     paddleSideY = paddleSideY - 10
-}
+  }
 else if (isDownArrow && paddleSideY < canvas.height - paddleSideHeight) {
     paddleSideY = paddleSideY + 10
+  }
+};
+
+
+// Ball 1 movement
+function ball1Movement() {
+  ball1X += ball1Xincrement
+  ball1Y += ball1Ydecrement
 }
 
+// Ball 2 movement
+function ball2Movement() {
+  ball2X += ball2Xdecrement
+  ball2Y += ball2Yincrement
 }
+
+// Ball Collision
+function ball2Collision() {
+  if (ball2X - ballRadius < 0) {
+    ball2Xdecrement = 3
+  } else if (ball2Y > canvas.height - paddleBotHeight - ballRadius) {
+    if (ball2X > paddleBotX && ball2X < paddleBotX + paddleBotWidth) {
+      ball2Yincrement = - 3
+      score += 10
+    } 
+  } else if (ball2X > canvas.width - paddleSideWidth - ballRadius) {
+    if (ball2Y > paddleSideY && ball2Y < paddleSideY + paddleSideHeight) {
+      ball2Xdecrement = - 3
+      score += 10
+    } 
+  } else if (ball2Y - ballRadius < 0) {
+    ball2Yincrement = 3
+  }
+}
+
 
 
 
@@ -119,8 +158,9 @@ else if (isDownArrow && paddleSideY < canvas.height - paddleSideHeight) {
 
 // Print Score
 function printScore(){
-    ctx.font = '18px Verdana'
-    ctx.fillText('Score: '+ score, 10, 20)
+    ctx.font = '18px monospace';
+    ctx.fillStyle = "white";
+    ctx.fillText('Score: '+ score, 10, 20);
 }
 
 
@@ -134,9 +174,13 @@ function game() {
   createPaddleSide()
   paddleMovement()
   printScore()
+ // ball1Movement()
+  ball2Movement()
+  //ball1Collision()
+  ball2Collision()
 }
 
 intervalId = setInterval(() => {
   requestAnimationFrame(game)
-}, 20)
+}, 20);
 
