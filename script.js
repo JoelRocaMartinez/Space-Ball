@@ -22,6 +22,7 @@ let ball1X = 230;
 let ball1Y = 230;
 
 let ballRadius = 10;
+
 // Ball 2 variables
 let ball2X = 200;
 let ball2Y = 200;
@@ -131,7 +132,26 @@ function ball2Movement() {
   ball2Y += ball2Yincrement
 }
 
-// Ball Collision
+// Ball 1 Collision
+function ball1Collision() {
+  if (ball1Y - ballRadius < 0) {
+    ball1Ydecrement = 3
+  } else if (ball1X > canvas.width - paddleSideWidth - ballRadius) {
+    if (ball1Y > paddleSideY && ball1Y < paddleSideY + paddleSideHeight) {
+      ball1Xincrement = - 3
+      score += 10
+    } 
+  } else if (ball1Y > canvas.height - paddleBotHeight - ballRadius) {
+    if (ball1X > paddleBotX && ball1X < paddleBotX + paddleBotWidth) {
+      ball1Ydecrement = - 3
+      score += 10
+    } 
+  } else if (ball1X - ballRadius < 0) {
+    ball1Xincrement = 3
+  }
+}
+
+// Ball 2 Collision
 function ball2Collision() {
   if (ball2X - ballRadius < 0) {
     ball2Xdecrement = 3
@@ -174,9 +194,9 @@ function game() {
   createPaddleSide()
   paddleMovement()
   printScore()
- // ball1Movement()
+  ball1Movement()
   ball2Movement()
-  //ball1Collision()
+  ball1Collision()
   ball2Collision()
 }
 
