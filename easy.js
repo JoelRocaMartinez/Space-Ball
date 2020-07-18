@@ -11,11 +11,11 @@ let isLeftArrow = false;
 let isUpArrow = false;
 let isDownArrow = false;
 
-let ball1Xincrement = 7
-let ball1Ydecrement = - 7
+let ball1Xincrement = 3
+let ball1Ydecrement = - 3
 
-let ball2Xdecrement = - 7
-let ball2Yincrement = 7
+let ball2Xdecrement = - 3
+let ball2Yincrement = 3
 
 // Ball 1 variables
 let ball1X = 70;
@@ -28,14 +28,14 @@ let ball2X = 200;
 let ball2Y = 200;
 
 // Paddle Bot variables
-let paddleBotX = 200;
-let paddleBotWidth = 100;
+let paddleBotX = 150;
+let paddleBotWidth = 200;
 let paddleBotHeight = 20;
 
 //Paddle Side variables
-let paddleSideY = 200;
+let paddleSideY = 150;
 let paddleSideWidth = 20;
-let paddleSideHeight = 100;
+let paddleSideHeight = 200;
 
 // Ball 1
 function createBall1() {
@@ -106,16 +106,16 @@ document.addEventListener('keyup', function(event){
 // Paddle movement
 function paddleMovement() {
   if (isRightArrow && paddleBotX < canvas.width - paddleBotWidth) {
-      paddleBotX = paddleBotX + 20
+      paddleBotX = paddleBotX + 10
   }
   else if (isLeftArrow && paddleBotX > 0) {
-      paddleBotX = paddleBotX - 20
+      paddleBotX = paddleBotX - 10
   }
   if (isUpArrow && paddleSideY > 0) {
-    paddleSideY = paddleSideY - 20
+    paddleSideY = paddleSideY - 10
   }
 else if (isDownArrow && paddleSideY < canvas.height - paddleSideHeight) {
-    paddleSideY = paddleSideY + 20
+    paddleSideY = paddleSideY + 10
   }
 };
 
@@ -135,38 +135,38 @@ function ball2Movement() {
 // Ball 1 Collision
 function ball1Collision() {
   if (ball1Y - ballRadius < 0) {
-    ball1Ydecrement = 7
+    ball1Ydecrement = 3
   } else if (ball1X > canvas.width - paddleSideWidth - ballRadius) {
     if (ball1Y > paddleSideY && ball1Y < paddleSideY + paddleSideHeight) {
-      ball1Xincrement = - 7
-      score += 10
+      ball1Xincrement = - 3
+      score += 1
     } 
   } else if (ball1Y > canvas.height - paddleBotHeight - ballRadius) {
     if (ball1X > paddleBotX && ball1X < paddleBotX + paddleBotWidth) {
-      ball1Ydecrement = - 7
-      score += 10
+      ball1Ydecrement = - 3
+      score += 1
     } 
   } else if (ball1X - ballRadius < 0) {
-    ball1Xincrement = 7
+    ball1Xincrement = 3
   }
 }
 
 // Ball 2 Collision
 function ball2Collision() {
   if (ball2X - ballRadius < 0) {
-    ball2Xdecrement = 7
+    ball2Xdecrement = 3
   } else if (ball2Y > canvas.height - paddleBotHeight - ballRadius) {
     if (ball2X > paddleBotX && ball2X < paddleBotX + paddleBotWidth) {
-      ball2Yincrement = - 7
+      ball2Yincrement = - 3
       score += 10
     } 
   } else if (ball2X > canvas.width - paddleSideWidth - ballRadius) {
     if (ball2Y > paddleSideY && ball2Y < paddleSideY + paddleSideHeight) {
-      ball2Xdecrement = - 7
+      ball2Xdecrement = - 3
       score += 10
     } 
   } else if (ball2Y - ballRadius < 0) {
-    ball2Yincrement = 7
+    ball2Yincrement = 3
   }
 }
 

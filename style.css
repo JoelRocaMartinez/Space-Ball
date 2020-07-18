@@ -5,6 +5,7 @@ canvas {
     margin-right: auto;
     display: block;
     margin-top: 10%;
+    z-index: 2147483647;
 }
 
 #myVideo {

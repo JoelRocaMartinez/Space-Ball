@@ -204,4 +204,4 @@ intervalId = setInterval(() => {
 
 
 
-document.querySelector("#easy").addEventListener("click", game)
+document.querySelector("#hard").addEventListener("click", game)
