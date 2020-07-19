@@ -6,6 +6,8 @@ let ctx = canvas.getContext("2d");
 let score = 0;
 let intervalId = 0;
 
+let bounce;
+
 let isRightArrow = false;
 let isLeftArrow = false;
 let isUpArrow = false;
@@ -179,7 +181,7 @@ function printScore(){
     ctx.fillText('Score: '+ score, 10, 20);
 }
 
-
+// Game Over
 function gameOver() {
   if (ball1X === canvas.width) {
     clearInterval(intervalId)
@@ -188,6 +190,11 @@ function gameOver() {
     alert("GAME OVER!")
     clearInterval(intervalId)
   }
+}
+
+// Bounce effect
+function preload() {
+  bounce = loadSound("bounce_effect.mp3")
 }
 
 
@@ -201,9 +208,9 @@ function game() {
   paddleMovement()
   printScore()
   ball1Movement()
-  ball2Movement()
+  //ball2Movement()
   ball1Collision()
-  ball2Collision()
+  //ball2Collision()
   gameOver()
 }
 
@@ -213,4 +220,4 @@ intervalId = setInterval(() => {
 
 
 
-document.querySelector("#easy").addEventListener("click", game)
+//document.querySelector("#easy").addEventListener("click", game)
