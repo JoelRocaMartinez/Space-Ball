@@ -136,12 +136,12 @@ function ball2Movement() {
 function ball1Collision() {
   if (ball1Y - ballRadius < 0) {
     ball1Ydecrement = 5
-  } else if (ball1X > canvas.width - paddleSideWidth - ballRadius) {
+  } else if (ball1X > canvas.width - paddleSideWidth - 10 - ballRadius) {
     if (ball1Y > paddleSideY && ball1Y < paddleSideY + paddleSideHeight) {
       ball1Xincrement = - 5
       score += 5
     } 
-  } else if (ball1Y > canvas.height - paddleBotHeight - ballRadius) {
+  } else if (ball1Y > canvas.height - paddleBotHeight - 10 - ballRadius) {
     if (ball1X > paddleBotX && ball1X < paddleBotX + paddleBotWidth) {
       ball1Ydecrement = - 5
       score += 5
@@ -155,12 +155,12 @@ function ball1Collision() {
 function ball2Collision() {
   if (ball2X - ballRadius < 0) {
     ball2Xdecrement = 5
-  } else if (ball2Y > canvas.height - paddleBotHeight - ballRadius) {
+  } else if (ball2Y > canvas.height - paddleBotHeight - 10 - ballRadius) {
     if (ball2X > paddleBotX && ball2X < paddleBotX + paddleBotWidth) {
       ball2Yincrement = - 5
       score += 10
     } 
-  } else if (ball2X > canvas.width - paddleSideWidth - ballRadius) {
+  } else if (ball2X > canvas.width - paddleSideWidth - 10 - ballRadius) {
     if (ball2Y > paddleSideY && ball2Y < paddleSideY + paddleSideHeight) {
       ball2Xdecrement = - 5
       score += 10
