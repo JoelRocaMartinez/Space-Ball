@@ -1,7 +1,5 @@
-let canvas = document.querySelector("#myCanvas")
-canvas.style.backgroundColor = "#0d3440"
-
-let ctx = canvas.getContext("2d");
+let ctx;
+let canvas;
 
 let score = 0;
 let intervalId = 0;
@@ -13,11 +11,11 @@ let isLeftArrow = false;
 let isUpArrow = false;
 let isDownArrow = false;
 
-let ball1Xincrement = 7
-let ball1Ydecrement = - 7
+let speed = 0;
+let width;
 
-let ball2Xdecrement = - 7
-let ball2Yincrement = 7
+
+
 
 // Ball 1 variables
 let ball1X = 70;
@@ -124,32 +122,32 @@ else if (isDownArrow && paddleSideY < canvas.height - paddleSideHeight) {
 
 // Ball 1 movement
 function ball1Movement() {
-  ball1X += ball1Xincrement
-  ball1Y += ball1Ydecrement
+  ball1X += speed
+  ball1Y += - speed
 }
 
 // Ball 2 movement
 function ball2Movement() {
-  ball2X += ball2Xdecrement
-  ball2Y += ball2Yincrement
+  ball2X += - speed
+  ball2Y += speed
 }
 
 // Ball 1 Collision
 function ball1Collision() {
   if (ball1Y - ballRadius < 0) {
-    ball1Ydecrement = 7
+    ball1Y + 3
   } else if (ball1X > canvas.width - paddleSideWidth - 10 - ballRadius) {
     if (ball1Y > paddleSideY && ball1Y < paddleSideY + paddleSideHeight) {
-      ball1Xincrement = - 7
+      ball1Xincrement = - 3
       score += 10
     } 
   } else if (ball1Y > canvas.height - paddleBotHeight- 10 - ballRadius) {
     if (ball1X > paddleBotX && ball1X < paddleBotX + paddleBotWidth) {
-      ball1Ydecrement = - 7
+      ball1Ydecrement = - 3
       score += 10
     } 
   } else if (ball1X - ballRadius < 0) {
-    ball1Xincrement = 7
+    ball1Xincrement = 3
   }
 }
 
@@ -173,7 +171,6 @@ function ball2Collision() {
 }
 
 
-
 // Print Score
 function printScore(){
     ctx.font = '18px monospace';
@@ -183,12 +180,13 @@ function printScore(){
 
 // Game Over
 function gameOver() {
-  if (ball1X === canvas.width) {
+  if (ball1X >= canvas.width || ball2X >= canvas.width) {
     clearInterval(intervalId)
     alert("GAME OVER!")
-  } else if (ball1Y === canvas.height) {
-    alert("GAME OVER!")
+  } else if (ball1Y >= canvas.height || ball2Y >= canvas.height) {
     clearInterval(intervalId)
+    alert("GAME OVER!")
+    
   }
 }
 
@@ -214,10 +212,32 @@ function game() {
   gameOver()
 }
 
-intervalId = setInterval(() => {
-  requestAnimationFrame(game)
-}, 20);
+function initiateGame(speedParam) {
+  speed = speedParam
+  swap()
+  intervalId = setInterval(() => {
+    requestAnimationFrame(game)
+  }, 20);
+}
 
 
 
-//document.querySelector("#easy").addEventListener("click", game)
+function swap() {
+ 
+  let elem = document.querySelector("#instructions")
+  elem.remove()
+  
+  canvas = document.createElement("canvas")
+  canvas.id = "myCanvas";
+  canvas.width = 500;
+  canvas.height = 500;
+  canvas.style.backgroundColor = "#0d3440"
+  ctx = canvas.getContext("2d");
+
+  let body = document.getElementsByTagName("body")[0];
+  body.appendChild(canvas)
+
+}
+
+
+document.querySelector("#easy").addEventListener("click", () => initiateGame(3))

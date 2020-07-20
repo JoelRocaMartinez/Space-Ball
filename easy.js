@@ -121,15 +121,15 @@ else if (isDownArrow && paddleSideY < canvas.height - paddleSideHeight) {
 
 
 // Ball 1 movement
-function ball1Movement() {
-  ball1X += ball1Xincrement
-  ball1Y += ball1Ydecrement
+function ball1Movement(speed) {
+  ball1X += speed
+  ball1Y += - speed
 }
 
 // Ball 2 movement
-function ball2Movement() {
-  ball2X += ball2Xdecrement
-  ball2Y += ball2Yincrement
+function ball2Movement(speed) {
+  ball2X += -speed
+  ball2Y += speed
 }
 
 // Ball 1 Collision
@@ -184,7 +184,7 @@ function printScore(){
 
 
 
-function game() {
+function game(speed, balls, widght) {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
   createBall1()
   createBall2()
@@ -192,8 +192,8 @@ function game() {
   createPaddleSide()
   paddleMovement()
   printScore()
-  ball1Movement()
-  ball2Movement()
+  ball1Movement(speed)
+  ball2Movement(speed)
   ball1Collision()
   ball2Collision()
 }
@@ -203,5 +203,7 @@ intervalId = setInterval(() => {
 }, 20);
 
 
+document.querySelector("#medium").addEventListener("click", () => game(6))
 
-document.querySelector("#easy").addEventListener("click", game)
+//document.querySelector("#easy").addEventListener("click", () => game(3, balls, widght))
+
