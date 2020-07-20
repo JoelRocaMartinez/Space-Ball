@@ -2,9 +2,9 @@ let ctx;
 let canvas;
 
 let score = 0;
+let point = 0;
 let intervalId = 0;
 
-let bounce;
 
 let isRightArrow = false;
 let isLeftArrow = false;
@@ -12,15 +12,15 @@ let isUpArrow = false;
 let isDownArrow = false;
 
 let speed = 0;
-let width;
 
+// Direction ball 1
 let dir1X = 1
 let dir1Y = -1
-
+// Direction ball 2
 let dir2X = -1
 let dir2Y = 1
 
-
+// Bounce effect
 let audioElement = new Audio('bounce_effect.mp3');
 
 
@@ -36,14 +36,14 @@ let ball2X = 200;
 let ball2Y = 200;
 
 // Paddle Bot variables
-let paddleBotX = 200;
+let paddleBotX = 0;
 let paddleBotWidth = 100;
 let paddleBotHeight = 20;
 
 //Paddle Side variables
 let paddleSideY = 200;
 let paddleSideWidth = 20;
-let paddleSideHeight = 100;
+let paddleSideHeight = 0;
 
 // Ball 1
 function createBall1() {
@@ -148,13 +148,13 @@ function ball1Collision() {
     if (ball1Y > paddleSideY && ball1Y < paddleSideY + paddleSideHeight) {
       dir1X = - dir1X
       audioElement.play()
-      score += 10
+      score += point
     } 
   } else if (ball1Y > canvas.height - paddleBotHeight- 10 - ballRadius) {
     if (ball1X > paddleBotX && ball1X < paddleBotX + paddleBotWidth) {
       dir1Y = - dir1Y
       audioElement.play()
-      score += 10
+      score += point
     } 
   } else if (ball1X - ballRadius < 0) {
     dir1X = - dir1X 
@@ -169,13 +169,13 @@ function ball2Collision() {
     if (ball2X > paddleBotX && ball2X < paddleBotX + paddleBotWidth) {
       dir2Y = -dir2Y
       audioElement.play()
-      score += 10
+      score += point 
     } 
   } else if (ball2X > canvas.width - paddleSideWidth - 10 - ballRadius) {
     if (ball2Y > paddleSideY && ball2Y < paddleSideY + paddleSideHeight) {
       dir2X = - dir2X
       audioElement.play()
-      score += 10
+      score += point
     } 
   } else if (ball2Y - ballRadius < 0) {
     dir2Y = - dir2Y
@@ -202,11 +202,6 @@ function gameOver() {
   }
 }
 
-// Bounce effect
-function preload() {
-  bounce = loadSound("bounce_effect.mp3")
-}
-
 
 
 function game() {
@@ -224,8 +219,11 @@ function game() {
   gameOver()
 }
 
-function initiateGame(speedParam) {
-  speed = speedParam
+function initiateGame(speedParam, padleBotWidth, padleSideHeight, points) {
+  point = points;
+  speed = speedParam;
+  paddleBotWidth = padleBotWidth;
+  paddleSideHeight = padleSideHeight;
   swap()
   intervalId = setInterval(() => {
     requestAnimationFrame(game)
@@ -235,7 +233,6 @@ function initiateGame(speedParam) {
 
 
 function swap() {
- 
   let elem = document.querySelector("#instructions")
   elem.remove()
   
@@ -251,8 +248,8 @@ function swap() {
 }
 
 
-document.querySelector("#easy").addEventListener("click", () => initiateGame(3))
+document.querySelector("#easy").addEventListener("click", () => initiateGame(3, 200, 200, 1))
 
-document.querySelector("#medium").addEventListener("click", () => initiateGame(5))
+document.querySelector("#medium").addEventListener("click", () => initiateGame(5, 150, 150, 3))
 
-document.querySelector("#hard").addEventListener("click", () => initiateGame(7))
+document.querySelector("#hard").addEventListener("click", () => initiateGame(7, 100, 100, 5))
