@@ -14,6 +14,14 @@ let isDownArrow = false;
 let speed = 0;
 let width;
 
+let dir1X = 1
+let dir1Y = -1
+
+let dir2X = -1
+let dir2Y = 1
+
+
+let audioElement = new Audio('bounce_effect.mp3');
 
 
 
@@ -61,7 +69,7 @@ function createBall2() {
 // Paddle Bot
 function createPaddleBot() {
   ctx.beginPath();
-  ctx.fillStyle = "#c7c7c7";
+  ctx.fillStyle = "#8A8A8A";
   ctx.fillRect(paddleBotX, (canvas.height - paddleBotHeight) - 10, paddleBotWidth, paddleBotHeight);
   ctx.closePath();
 };
@@ -69,7 +77,7 @@ function createPaddleBot() {
 // Paddle Side
 function createPaddleSide() {
   ctx.beginPath();
-  ctx.fillStyle = "#c7c7c7";
+  ctx.fillStyle = "#8A8A8A";
   ctx.fillRect((canvas.width - paddleSideWidth) -10, paddleSideY, paddleSideWidth, paddleSideHeight);
   ctx.closePath();
 };
@@ -122,51 +130,55 @@ else if (isDownArrow && paddleSideY < canvas.height - paddleSideHeight) {
 
 // Ball 1 movement
 function ball1Movement() {
-  ball1X += speed
-  ball1Y += - speed
+  ball1X += (speed * dir1X)
+  ball1Y += (speed * dir1Y)
 }
 
 // Ball 2 movement
 function ball2Movement() {
-  ball2X += - speed
-  ball2Y += speed
+  ball2X += (speed * dir2X)
+  ball2Y += (speed * dir2Y)
 }
 
 // Ball 1 Collision
 function ball1Collision() {
   if (ball1Y - ballRadius < 0) {
-    ball1Y + 3
+    dir1Y = - dir1Y
   } else if (ball1X > canvas.width - paddleSideWidth - 10 - ballRadius) {
     if (ball1Y > paddleSideY && ball1Y < paddleSideY + paddleSideHeight) {
-      ball1Xincrement = - 3
+      dir1X = - dir1X
+      audioElement.play()
       score += 10
     } 
   } else if (ball1Y > canvas.height - paddleBotHeight- 10 - ballRadius) {
     if (ball1X > paddleBotX && ball1X < paddleBotX + paddleBotWidth) {
-      ball1Ydecrement = - 3
+      dir1Y = - dir1Y
+      audioElement.play()
       score += 10
     } 
   } else if (ball1X - ballRadius < 0) {
-    ball1Xincrement = 3
+    dir1X = - dir1X 
   }
 }
 
 // Ball 2 Collision
 function ball2Collision() {
   if (ball2X - ballRadius < 0) {
-    ball2Xdecrement = 7
+    dir2X = - dir2X
   } else if (ball2Y > canvas.height - paddleBotHeight -10 - ballRadius) {
     if (ball2X > paddleBotX && ball2X < paddleBotX + paddleBotWidth) {
-      ball2Yincrement = - 7
+      dir2Y = -dir2Y
+      audioElement.play()
       score += 10
     } 
   } else if (ball2X > canvas.width - paddleSideWidth - 10 - ballRadius) {
     if (ball2Y > paddleSideY && ball2Y < paddleSideY + paddleSideHeight) {
-      ball2Xdecrement = - 7
+      dir2X = - dir2X
+      audioElement.play()
       score += 10
     } 
   } else if (ball2Y - ballRadius < 0) {
-    ball2Yincrement = 7
+    dir2Y = - dir2Y
   }
 }
 
@@ -206,9 +218,9 @@ function game() {
   paddleMovement()
   printScore()
   ball1Movement()
-  //ball2Movement()
+  ball2Movement()
   ball1Collision()
-  //ball2Collision()
+  ball2Collision()
   gameOver()
 }
 
@@ -231,7 +243,6 @@ function swap() {
   canvas.id = "myCanvas";
   canvas.width = 500;
   canvas.height = 500;
-  canvas.style.backgroundColor = "#0d3440"
   ctx = canvas.getContext("2d");
 
   let body = document.getElementsByTagName("body")[0];
@@ -241,3 +252,7 @@ function swap() {
 
 
 document.querySelector("#easy").addEventListener("click", () => initiateGame(3))
+
+document.querySelector("#medium").addEventListener("click", () => initiateGame(5))
+
+document.querySelector("#hard").addEventListener("click", () => initiateGame(7))
