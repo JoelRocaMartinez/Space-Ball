@@ -8,6 +8,7 @@
     
 }
 
+
 #myVideo {
     position: fixed;
     right: 0;
@@ -16,10 +17,12 @@
     min-height: 100%;
 }
 
+
 #audioControls {
     position: absolute;
     bottom: 40px;
 }
+
 
 .content {
     position: fixed;
@@ -32,37 +35,93 @@
     text-decoration: underline;
 }
 
+
 .selectMode {
     position: relative;
     color: #f1f1f1;
-    top: 450px;
-    left: 400px;
+    top: 400px;
     font-family: monospace;
     font-size: 15px;
     display: flex;
-    flex-direction: column; 
+    margin-left: 25%;
+    
     
 }
 
-button {
-    width: 280px;
-    height: 75px;
-    border-radius: 10px;
-    background-color: rgb(133, 162, 173);
-    font-family: monospace;
-    font-size: 30px;
-}
 
 .highScores {
     position: relative;
     color: #f1f1f1;
-    top: 25px;
-    left: 1350px;
+    top: 250px;
     font-family: monospace;
+    display: flex;
+    justify-content: flex-end;
+    right: 350px;
+
 }
+
 
 .hallOfFame {
     font-size: 30px;
     font-weight: 600;
 
+}
+
+
+.spot {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+   
+} 
+
+  
+.svg-wrapper {
+    margin-top: -40px;
+    margin-bottom: 80px;
+    position: relative;
+    width: 280px;
+    height: 75px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    margin-left: 25%;
+    margin-right: 5px
+}
+
+  
+#shape {
+    stroke-width: 6px;
+    fill: transparent;
+    stroke: #009FFD;
+    stroke-dasharray: 195 195;
+    stroke-dashoffset: 0;
+    transition: 1s all ease;
+}
+
+  
+#text {
+    margin-top: -50px;
+    text-align: center;
+    
+}
+
+  
+#text a {
+    color: white;
+    text-decoration: none;
+    font-weight: 100;
+    font-size: 26px;
+    font-family: monospace;
+    
+}
+
+   
+.svg-wrapper:hover #shape {
+    stroke-dasharray: 50 0;
+    stroke-width: 3px;
+    stroke-dashoffset: 0;
+    stroke: #06D6A0;
 }

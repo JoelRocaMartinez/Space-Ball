@@ -26,8 +26,8 @@ let audioElement = new Audio('bounce_effect.mp3');
 
 
 // Ball 1 variables
-let ball1X = 70;
-let ball1Y = 70;
+let ball1X = 100;
+let ball1Y = 100;
 
 let ballRadius = 10;
 
@@ -219,9 +219,11 @@ function game() {
   gameOver()
 }
 
-function initiateGame(speedParam, padleBotWidth, padleSideHeight, points) {
+function initiateGame(speedBall, padleBotWidth, padleSideHeight, points, padleBotStart, padleSideStart ) {
+  paddleBotX = padleBotStart
+  paddleSideY = padleSideStart
   point = points;
-  speed = speedParam;
+  speed = speedBall;
   paddleBotWidth = padleBotWidth;
   paddleSideHeight = padleSideHeight;
   swap()
@@ -248,8 +250,8 @@ function swap() {
 }
 
 
-document.querySelector("#easy").addEventListener("click", () => initiateGame(3, 200, 200, 1))
+document.querySelector("#easy").addEventListener("click", () => initiateGame(3, 150, 150, 1, 175, 175))
 
-document.querySelector("#medium").addEventListener("click", () => initiateGame(5, 150, 150, 3))
+document.querySelector("#medium").addEventListener("click", () => initiateGame(5, 125, 125, 3, 187.5, 187.5))
 
-document.querySelector("#hard").addEventListener("click", () => initiateGame(7, 100, 100, 5))
+document.querySelector("#hard").addEventListener("click", () => initiateGame(7, 100, 100, 5, 200, 200))

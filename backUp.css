@@ -1,0 +1,72 @@
+#myCanvas {
+    position: fixed;
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 10%;
+    margin-left: 35%;
+    background-color: rgb(5, 14, 51);
+    
+}
+
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+#audioControls {
+    position: absolute;
+    bottom: 40px;
+}
+
+.content {
+    position: fixed;
+    left: 35%;
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+    font-size: 50px;
+    top: 5%;
+    text-decoration: underline;
+}
+
+.selectMode {
+    position: relative;
+    color: #f1f1f1;
+    top: 450px;
+    left: 400px;
+    font-family: monospace;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column; 
+    
+}
+
+button {
+    margin-top: 10px;
+    width: 280px;
+    height: 75px;
+    background-color: rgb(133, 162, 173);
+    font-family: monospace;
+    font-size: 30px;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;    
+}
+
+
+.highScores {
+    position: relative;
+    color: #f1f1f1;
+    top: 25px;
+    left: 1350px;
+    font-family: monospace;
+}
+
+.hallOfFame {
+    font-size: 30px;
+    font-weight: 600;
+
+}

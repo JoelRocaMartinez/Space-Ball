@@ -19,9 +19,6 @@
   
     <div class="selectMode">
       <h1>Select Difficulty</h1>
-      <button id="easy">EASY</button>
-      <button id="medium">MEDIUM</button>
-      <button id="hard">HARD</button>
     </div>
   
     <div class="highScores">
@@ -38,12 +35,41 @@
         <li></li>
       </ol>
     </div>
-  </div> 
+  
+
+  <div class="svg-wrapper">
+    <svg height="75" width="280" xmlns="http://www.w3.org/2000/svg">
+      <rect id="shape" height="75" width="280" />
+      <div id="text">
+        <a href=""><span class="spot"></span>EASY</a>
+      </div>
+    </svg>
+  </div>
+  
+  <div class="svg-wrapper">
+    <svg height="75" width="280" xmlns="http://www.w3.org/2000/svg">
+      <rect id="shape" height="75" width="280" />
+      <div id="text">
+        <a href=""><span class="spot"></span>MEDIUM</a>
+      </div>
+    </svg>
+  </div>
+  
+  <div class="svg-wrapper">
+    <svg height="75" width="280" xmlns="http://www.w3.org/2000/svg">
+      <rect id="shape" height="75" width="280" />
+      <div id="text">
+        <a href=""><span class="spot"></span>HARD</a>
+      </div>
+    </svg>
+  </div>
+</div> 
+  
 
     
     <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
-    <audio  id="controls">
+    <audio autoplay id="controls">
       <source src="audio_start_screen.mp3" type="audio/mpeg">
     </audio>
 

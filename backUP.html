@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Pong</title>
+    
+</head>
+
+<body>
+  <video autoplay muted loop id="myVideo">
+    <source src="star_animation_video.mp4" type="video/mp4">
+  </video>
+  
+ <div id="instructions">
+    <div class="content">
+      <h1><i>Space Pong</i></h1>
+    </div>
+  
+    <div class="selectMode">
+      <h1>Select Difficulty</h1>
+      <button id="easy">EASY</button>
+      <button id="medium">MEDIUM</button>
+      <button id="hard">HARD</button>
+    </div>
+  
+    <div class="highScores">
+      <ol class="hallOfFame">Hall of Fame
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ol>
+    </div>
+  </div> 
+
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <audio  id="controls">
+    <source src="audio_start_screen.mp3" type="audio/mpeg">
+  </audio>
+
+</body>
+
+</html>
