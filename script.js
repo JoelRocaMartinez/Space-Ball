@@ -16,6 +16,7 @@ let speed = 0;
 // Direction ball 1
 let dir1X = 1
 let dir1Y = -1
+
 // Direction ball 2
 let dir2X = -1
 let dir2Y = 1
@@ -27,14 +28,13 @@ let audioElement3 = new Audio('bounce_effect.mp3');
 let audioElement4 = new Audio('bounce_effect.mp3');
 
 // Start screen volume
-let audioStart = document.getElementById("controls")
+let audioStart = document.getElementById("controls");
+audioStart.volume = 0.2;
+
+
 
 // Background Video
-
-let video = document.getElementById("myVideo")
-
-
-
+let video = document.getElementById("myVideo");
 
 
 
@@ -95,7 +95,7 @@ function createPaddleSide() {
   ctx.closePath();
 };
 
-
+// Event Listeners for Arrows
 document.addEventListener('keydown', function(event){
   if (event.key === 'ArrowRight') {
       isRightArrow = true;
@@ -203,6 +203,7 @@ function printScore(){
     ctx.fillText('Score: '+ score, 10, 20);
 }
 
+
 // Game Over
 function gameOver() {
   if (ball1X >= canvas.width || ball2X >= canvas.width) {
@@ -229,11 +230,11 @@ function gameOver() {
     // RESTART BUTTON
     let btn = document.createElement("button");
     btn.id = "restart";
-    btn.setAttribute("type", "reset")
     let restart = document.createTextNode("Restart");
     btn.appendChild(restart);
     body.appendChild(btn);
 
+    document.querySelector("#restart").addEventListener("click", () => swap2())
 
   } else if (ball1Y >= canvas.height || ball2Y >= canvas.height) {
     clearInterval(intervalId);
@@ -259,11 +260,77 @@ function gameOver() {
     // RESTART BUTTON
     let btn = document.createElement("button");
     btn.id = "restart";
-    btn.setAttribute("type", "reset")
     let restart = document.createTextNode("Restart");
     btn.appendChild(restart);
     body.appendChild(btn);
+
+    document.querySelector("#restart").addEventListener("click", () => swap2())
+    
   }
+}
+
+// From game Over to main screen
+function swap2() {
+  let h1 = document.createElement("h1");
+  let div = document.createElement("div");
+  let btn = document.createElement("button");
+  div.remove();
+  h1.remove();
+  btn.remove();
+  document.createElement("div").innerHtml = `<div id="instructions">
+  <div class="content">
+    <h1><i>Space Pong</i></h1>
+  </div>
+
+  <div class="selectMode">
+    <h1>Select Difficulty</h1>
+  </div>
+
+  <div class="highScores">
+    <ol class="hallOfFame">Hall of Fame
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ol>
+  </div>
+
+
+<div class="svg-wrapper">
+  <svg height="75" width="280" xmlns="http://www.w3.org/2000/svg">
+    <rect id="shape" height="75" width="280" />
+    <div id="text">
+      <a id="easy"><span class="spot"></span>EASY</a>
+    </div>
+  </svg>
+</div>
+
+<div class="svg-wrapper">
+  <svg height="75" width="280" xmlns="http://www.w3.org/2000/svg">
+    <rect id="shape" height="75" width="280" />
+    <div id="text">
+      <a id="medium"><span class="spot"></span>MEDIUM</a>
+    </div>
+  </svg>
+</div>
+
+<div class="svg-wrapper">
+  <svg height="75" width="280" xmlns="http://www.w3.org/2000/svg">
+    <rect id="shape" height="75" width="280" />
+    <div id="text">
+      <a id="hard"><span class="spot"></span>HARD</a>
+    </div>
+  </svg>
+</div>
+</div>`
+
+
 }
 
 
@@ -284,6 +351,7 @@ function game() {
 }
 
 function initiateGame(speedBall, padleBotWidth, padleSideHeight, points, padleBotStart, padleSideStart) {
+  audioStart.pause()
   paddleBotX = padleBotStart
   paddleSideY = padleSideStart
   point = points;
@@ -310,9 +378,7 @@ function swap() {
 
   let body = document.getElementsByTagName("body")[0];
   body.appendChild(canvas)
-
 }
-
 
 
 
@@ -322,4 +388,3 @@ document.querySelector("#medium").addEventListener("click", () => initiateGame(5
 
 document.querySelector("#hard").addEventListener("click", () => initiateGame(7, 100, 100, 5, 200, 200))
 
-document.querySelector("#restart").addEventListener("click", reset())
