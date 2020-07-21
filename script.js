@@ -21,7 +21,20 @@ let dir2X = -1
 let dir2Y = 1
 
 // Bounce effect
-let audioElement = new Audio('bounce_effect.mp3');
+let audioElement1 = new Audio('bounce_effect.mp3');
+let audioElement2 = new Audio('bounce_effect.mp3');
+let audioElement3 = new Audio('bounce_effect.mp3');
+let audioElement4 = new Audio('bounce_effect.mp3');
+
+// Start screen volume
+let audioStart = document.getElementById("controls")
+
+// Background Video
+
+let video = document.getElementById("myVideo")
+
+
+
 
 
 
@@ -147,13 +160,13 @@ function ball1Collision() {
   } else if (ball1X > canvas.width - paddleSideWidth - 10 - ballRadius) {
     if (ball1Y > paddleSideY && ball1Y < paddleSideY + paddleSideHeight) {
       dir1X = - dir1X
-      audioElement.play()
+      audioElement1.play()
       score += point
     } 
   } else if (ball1Y > canvas.height - paddleBotHeight- 10 - ballRadius) {
     if (ball1X > paddleBotX && ball1X < paddleBotX + paddleBotWidth) {
       dir1Y = - dir1Y
-      audioElement.play()
+      audioElement2.play()
       score += point
     } 
   } else if (ball1X - ballRadius < 0) {
@@ -168,13 +181,13 @@ function ball2Collision() {
   } else if (ball2Y > canvas.height - paddleBotHeight -10 - ballRadius) {
     if (ball2X > paddleBotX && ball2X < paddleBotX + paddleBotWidth) {
       dir2Y = -dir2Y
-      audioElement.play()
+      audioElement3.play()
       score += point 
     } 
   } else if (ball2X > canvas.width - paddleSideWidth - 10 - ballRadius) {
     if (ball2Y > paddleSideY && ball2Y < paddleSideY + paddleSideHeight) {
       dir2X = - dir2X
-      audioElement.play()
+      audioElement4.play()
       score += point
     } 
   } else if (ball2Y - ballRadius < 0) {
@@ -193,12 +206,46 @@ function printScore(){
 // Game Over
 function gameOver() {
   if (ball1X >= canvas.width || ball2X >= canvas.width) {
-    clearInterval(intervalId)
-    alert("GAME OVER!")
+    clearInterval(intervalId);
+    
+    let finish = document.querySelector("#myCanvas");
+    finish.remove();
+
+    let h1 = document.createElement("h1");
+    h1.id = "gameOver";
+    let itsOver = document.createTextNode("GAME OVER");
+    h1.appendChild(itsOver);
+
+    let body = document.getElementsByTagName("body")[0];
+    body.appendChild(h1)
+
+    let restart = document.createElement("button");
+    restart.id = "restart";
+
+    body.appendChild(restart);
+
+    
+
+
   } else if (ball1Y >= canvas.height || ball2Y >= canvas.height) {
     clearInterval(intervalId)
-    alert("GAME OVER!")
     
+    let finish = document.querySelector("#myCanvas")
+    finish.remove()
+    
+    let h1 = document.createElement("h1");
+    h1.id = "gameOver";
+    let itsOver = document.createTextNode("GAME OVER");
+    h1.appendChild(itsOver);
+
+    let body = document.getElementsByTagName("body")[0];
+    body.appendChild(h1)
+
+    let restart = document.createElement("button");
+    restart.id = "restart";
+
+    body.appendChild(restart);
+
   }
 }
 
@@ -219,7 +266,7 @@ function game() {
   gameOver()
 }
 
-function initiateGame(speedBall, padleBotWidth, padleSideHeight, points, padleBotStart, padleSideStart ) {
+function initiateGame(speedBall, padleBotWidth, padleSideHeight, points, padleBotStart, padleSideStart) {
   paddleBotX = padleBotStart
   paddleSideY = padleSideStart
   point = points;
@@ -248,6 +295,8 @@ function swap() {
   body.appendChild(canvas)
 
 }
+
+
 
 
 document.querySelector("#easy").addEventListener("click", () => initiateGame(3, 150, 150, 1, 175, 175))
