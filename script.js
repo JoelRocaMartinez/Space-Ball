@@ -210,42 +210,59 @@ function gameOver() {
     
     let finish = document.querySelector("#myCanvas");
     finish.remove();
-
+    
+    // GAME OVER
     let h1 = document.createElement("h1");
     h1.id = "gameOver";
     let itsOver = document.createTextNode("GAME OVER");
     h1.appendChild(itsOver);
-
     let body = document.getElementsByTagName("body")[0];
     body.appendChild(h1)
-
-    let restart = document.createElement("button");
-    restart.id = "restart";
-
-    body.appendChild(restart);
-
     
+    // FINAL SCORE
+    let div = document.createElement("div");
+    div.id = "finalScore";
+    let finalScore = document.createTextNode("Final Score: " + score);
+    div.appendChild(finalScore);
+    body.appendChild(div)
+    
+    // RESTART BUTTON
+    let btn = document.createElement("button");
+    btn.id = "restart";
+    btn.setAttribute("type", "reset")
+    let restart = document.createTextNode("Restart");
+    btn.appendChild(restart);
+    body.appendChild(btn);
 
 
   } else if (ball1Y >= canvas.height || ball2Y >= canvas.height) {
-    clearInterval(intervalId)
+    clearInterval(intervalId);
     
-    let finish = document.querySelector("#myCanvas")
-    finish.remove()
+    let finish = document.querySelector("#myCanvas");
+    finish.remove();
     
+    // GAME OVER
     let h1 = document.createElement("h1");
     h1.id = "gameOver";
     let itsOver = document.createTextNode("GAME OVER");
     h1.appendChild(itsOver);
-
     let body = document.getElementsByTagName("body")[0];
     body.appendChild(h1)
-
-    let restart = document.createElement("button");
-    restart.id = "restart";
-
-    body.appendChild(restart);
-
+    
+    // FINAL SCORE
+    let div = document.createElement("div");
+    div.id = "finalScore";
+    let finalScore = document.createTextNode("Final Score: " + score);
+    div.appendChild(finalScore);
+    body.appendChild(div)
+    
+    // RESTART BUTTON
+    let btn = document.createElement("button");
+    btn.id = "restart";
+    btn.setAttribute("type", "reset")
+    let restart = document.createTextNode("Restart");
+    btn.appendChild(restart);
+    body.appendChild(btn);
   }
 }
 
@@ -304,3 +321,5 @@ document.querySelector("#easy").addEventListener("click", () => initiateGame(3, 
 document.querySelector("#medium").addEventListener("click", () => initiateGame(5, 125, 125, 3, 187.5, 187.5))
 
 document.querySelector("#hard").addEventListener("click", () => initiateGame(7, 100, 100, 5, 200, 200))
+
+document.querySelector("#restart").addEventListener("click", reset())
