@@ -28,13 +28,14 @@ let audioElement3 = new Audio('bounce_effect.mp3');
 let audioElement4 = new Audio('bounce_effect.mp3');
 
 // Start screen volume
-let audioStart = document.getElementById("controls");
-audioStart.volume = 0.2;
-
-
+//let audioStart = document.getElementById("controls");
+//audioStart.volume = 0.2;
 
 // Background Video
 let video = document.getElementById("myVideo");
+
+// Game Over effect
+let gameOverAudio = new Audio("game_over.mp3")
 
 
 
@@ -208,6 +209,7 @@ function printScore(){
 function gameOver() {
   if (ball1X >= canvas.width || ball2X >= canvas.width) {
     clearInterval(intervalId);
+    gameOverAudio.play();
     
     let finish = document.querySelector("#myCanvas");
     finish.remove();
@@ -238,6 +240,7 @@ function gameOver() {
 
   } else if (ball1Y >= canvas.height || ball2Y >= canvas.height) {
     clearInterval(intervalId);
+    gameOverAudio.play();
     
     let finish = document.querySelector("#myCanvas");
     finish.remove();
@@ -351,7 +354,7 @@ function game() {
 }
 
 function initiateGame(speedBall, padleBotWidth, padleSideHeight, points, padleBotStart, padleSideStart) {
-  audioStart.pause()
+  //audioStart.pause()
   paddleBotX = padleBotStart
   paddleSideY = padleSideStart
   point = points;
