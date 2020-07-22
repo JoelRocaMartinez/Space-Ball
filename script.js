@@ -1,3 +1,5 @@
+
+
 let ctx;
 let canvas;
 
@@ -12,6 +14,8 @@ let isUpArrow = false;
 let isDownArrow = false;
 
 let speed = 0;
+
+
 
 // Direction ball 1
 let dir1X = 1
