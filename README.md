@@ -57,7 +57,7 @@ Trello
 https://trello.com/b/xoXufWLT/space-ball
 
 Git
-(URls for the project repo and deploy Link Repo Link Deploy)
+https://joelrocamartinez.github.io/Space-Pong
 
 Slides
 (URls for the project presentation (slides) Link Slides.com)
