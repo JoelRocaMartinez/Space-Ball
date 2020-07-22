@@ -32,7 +32,7 @@ let audioElement4 = new Audio('bounce_effect.mp3');
 // Audio Start
 //let audioStart = new Audio("audio_start_screen.mp3")
 //audioStart.volume = 0.1;
-//audioStart.play();
+//audio.load();
 
 
 // Background Video
