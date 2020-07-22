@@ -31,6 +31,10 @@ let audioElement2 = new Audio('bounce_effect.mp3');
 let audioElement3 = new Audio('bounce_effect.mp3');
 let audioElement4 = new Audio('bounce_effect.mp3');
 
+let audioStart = new Audio("audio_start_screen.mp3")
+audioStart.volume = 0.1;
+audioStart.play();
+
 
 // Background Video
 let video = document.getElementById("myVideo");
@@ -294,7 +298,7 @@ function reset() {
 
 // Restarts Game from main page
 function restartGame() {
-  audio.load();
+  audioStart.load();
   reset();
   div.remove();
   h1.remove();
