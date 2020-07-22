@@ -434,10 +434,15 @@ function start(){
 
 }
 
-window.addEventListener('load', () => {
-  audioStart.autoplay = true;
-  audioStart.muted = true;
-  audioStart.play();
-  audioStart.volume = 0.05;
-  start();
+let startGame = true;
+
+window.addEventListener('mouseover', () => {
+  if(startGame){
+    startGame = false;
+    audioStart.autoplay = true;
+    // audioStart.muted = true;
+    audioStart.play();
+    audioStart.volume = 0.05;
+    start();
+  }
 })
