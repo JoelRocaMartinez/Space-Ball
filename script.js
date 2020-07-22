@@ -30,9 +30,8 @@ let audioElement3 = new Audio('bounce_effect.mp3');
 let audioElement4 = new Audio('bounce_effect.mp3');
 
 // Audio Start
-//let audioStart = new Audio("audio_start_screen.mp3")
-//audioStart.volume = 0.1;
-//audio.load();
+let audioStart = new Audio("audio_start_screen.mp3")
+
 
 
 // Background Video
@@ -297,7 +296,7 @@ function reset() {
 
 // Restarts Game from main page
 function restartGame() {
-  audio.load();
+  audioStart.play();
   reset();
   div.remove();
   h1.remove();
@@ -389,7 +388,8 @@ function game() {
 }
 
 function initiateGame(speedBall, padleBotWidth, padleSideHeight, points, padleBotStart, padleSideStart) {
-  document.getElementById("controls").pause();
+  audioStart.pause();
+  audioStart.currentTime = 0;
   paddleBotX = padleBotStart
   paddleSideY = padleSideStart
   point = points;
@@ -424,9 +424,19 @@ function swap() {
 
 
 
-document.querySelector("#easy").addEventListener("click", () => initiateGame(3, 150, 150, 1, 175, 175))
+function start(){
 
-document.querySelector("#medium").addEventListener("click", () => initiateGame(5, 125, 125, 3, 187.5, 187.5))
+  document.querySelector("#easy").addEventListener("click", () => initiateGame(3, 150, 150, 1, 175, 175))
 
-document.querySelector("#hard").addEventListener("click", () => initiateGame(7, 100, 100, 5, 200, 200))
+  document.querySelector("#medium").addEventListener("click", () => initiateGame(5, 125, 125, 3, 187.5, 187.5))
 
+  document.querySelector("#hard").addEventListener("click", () => initiateGame(7, 100, 100, 5, 200, 200))
+
+}
+
+window.addEventListener('load', () => {
+  audioStart.autoplay = true;
+  audioStart.play();
+  audioStart.volume = 0.05;
+  start();
+})
