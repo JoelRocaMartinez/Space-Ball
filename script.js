@@ -436,6 +436,7 @@ function start(){
 
 window.addEventListener('load', () => {
   audioStart.autoplay = true;
+  audioStart.muted = true;
   audioStart.play();
   audioStart.volume = 0.05;
   start();
