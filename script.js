@@ -5,6 +5,11 @@ let score = 0;
 let point = 0;
 let intervalId = 0;
 
+// Save key for local storage of high score
+let saveKeyScore = "highscore";
+
+let highScore = document.querySelector(".score")
+
 
 let isRightArrow = false;
 let isLeftArrow = false;
@@ -12,7 +17,6 @@ let isUpArrow = false;
 let isDownArrow = false;
 
 let speed = 0;
-
 
 
 // Direction ball 1
@@ -242,6 +246,12 @@ function gameOver() {
     btn.appendChild(restart);
     body.appendChild(btn);
 
+    // CHECK HIGH SCORE
+    if (score > highScore) {
+      highScore = score;
+      localStorage.setItem(saveKeyScore, highScore);
+    }
+
     document.querySelector("#restart").addEventListener("click", () => restartGame())
 
   } else if (ball1Y >= canvas.height || ball2Y >= canvas.height) {
@@ -272,11 +282,28 @@ function gameOver() {
     btn.appendChild(restart);
     body.appendChild(btn);
 
+     // CHECK HIGH SCORE
+     if (score > highScore) {
+      highScore = score;
+      localStorage.setItem(saveKeyScore, highScore);
+    }
+
     document.querySelector("#restart").addEventListener("click", () => restartGame())
     
   }
 }
 
+// Set High Score
+function setHighScore() {
+  let scoreStr = localStorage.getItem(saveKeyScore)
+  if (scoreStr == null) {
+  highScore = 0;
+  } else {
+  highScore = parseInt(scoreStr);
+  }
+}
+
+// Resets original values
 function reset() {
   //Ball 1 coordenates
   ball1X = 100;
@@ -385,7 +412,9 @@ function game() {
   ball1Collision()
   ball2Collision()
   gameOver()
+  setHighScore()
 }
+
 
 function initiateGame(speedBall, padleBotWidth, padleSideHeight, points, padleBotStart, padleSideStart) {
   audioStart.pause();
@@ -418,9 +447,7 @@ function swap() {
   body.appendChild(canvas)
 }
 
-//function saveLocalStorage() {
-//  score
-//}
+
 
 
 
@@ -446,3 +473,9 @@ window.addEventListener('mouseover', () => {
     start();
   }
 })
+
+
+
+
+
+
