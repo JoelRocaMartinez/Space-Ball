@@ -28,8 +28,7 @@ let audioElement3 = new Audio('bounce_effect.mp3');
 let audioElement4 = new Audio('bounce_effect.mp3');
 
 // Start screen volume
-//let audioStart = document.getElementById("controls");
-//audioStart.volume = 0.2;
+let audioStart = document.getElementById("controls");
 
 // Background Video
 let video = document.getElementById("myVideo");
@@ -204,6 +203,10 @@ function printScore(){
     ctx.fillText('Score: '+ score, 10, 20);
 }
 
+let h1;
+let div;
+let btn;
+let body = document.getElementsByTagName("body")[0];
 
 // Game Over
 function gameOver() {
@@ -215,28 +218,27 @@ function gameOver() {
     finish.remove();
     
     // GAME OVER
-    let h1 = document.createElement("h1");
+    h1 = document.createElement("h1");
     h1.id = "gameOver";
     let itsOver = document.createTextNode("GAME OVER");
     h1.appendChild(itsOver);
-    let body = document.getElementsByTagName("body")[0];
     body.appendChild(h1)
     
     // FINAL SCORE
-    let div = document.createElement("div");
+    div = document.createElement("div");
     div.id = "finalScore";
     let finalScore = document.createTextNode("Final Score: " + score);
     div.appendChild(finalScore);
     body.appendChild(div)
     
     // RESTART BUTTON
-    let btn = document.createElement("button");
+    btn = document.createElement("button");
     btn.id = "restart";
     let restart = document.createTextNode("Restart");
     btn.appendChild(restart);
     body.appendChild(btn);
 
-    document.querySelector("#restart").addEventListener("click", () => swap2())
+    document.querySelector("#restart").addEventListener("click", () => restartGame())
 
   } else if (ball1Y >= canvas.height || ball2Y >= canvas.height) {
     clearInterval(intervalId);
@@ -246,41 +248,39 @@ function gameOver() {
     finish.remove();
     
     // GAME OVER
-    let h1 = document.createElement("h1");
+    h1 = document.createElement("h1");
     h1.id = "gameOver";
     let itsOver = document.createTextNode("GAME OVER");
     h1.appendChild(itsOver);
-    let body = document.getElementsByTagName("body")[0];
     body.appendChild(h1)
     
     // FINAL SCORE
-    let div = document.createElement("div");
+    div = document.createElement("div");
     div.id = "finalScore";
     let finalScore = document.createTextNode("Final Score: " + score);
     div.appendChild(finalScore);
     body.appendChild(div)
     
     // RESTART BUTTON
-    let btn = document.createElement("button");
+    btn = document.createElement("button");
     btn.id = "restart";
     let restart = document.createTextNode("Restart");
     btn.appendChild(restart);
     body.appendChild(btn);
 
-    document.querySelector("#restart").addEventListener("click", () => swap2())
+    document.querySelector("#restart").addEventListener("click", () => restartGame())
     
   }
 }
 
-// From game Over to main screen
-function swap2() {
-  let h1 = document.createElement("h1");
-  let div = document.createElement("div");
-  let btn = document.createElement("button");
+// Restarts Game from main page
+function restartGame() {
+  reset();
   div.remove();
   h1.remove();
   btn.remove();
-  document.createElement("div").innerHtml = `<div id="instructions">
+  let start = document.createElement("div")
+  start.innerHTML = `<div id="instructions">
   <div class="content">
     <h1><i>Space Pong</i></h1>
   </div>
@@ -334,9 +334,37 @@ function swap2() {
 </div>`
 
 
+
+body.appendChild(start);
+
+
+start.querySelector("#easy").addEventListener("click", () => initiateGame(3, 150, 150, 1, 175, 175))
+
+start.querySelector("#medium").addEventListener("click", () => initiateGame(5, 125, 125, 3, 187.5, 187.5))
+
+start.querySelector("#hard").addEventListener("click", () => initiateGame(7, 100, 100, 5, 200, 200))
+
+
 }
 
 
+function reset() {
+//Ball 1 coordenates
+ball1X = 100;
+ball1Y = 100;
+// Ball 2 coordenates
+ball2X = 200;
+ball2Y = 200;
+// Direction ball 1
+dir1X = 1;
+dir1Y = -1;
+// Direction ball 2
+dir2X = -1;
+dir2Y = 1;
+// Score
+score = 0;
+
+}
 
 function game() {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -354,7 +382,7 @@ function game() {
 }
 
 function initiateGame(speedBall, padleBotWidth, padleSideHeight, points, padleBotStart, padleSideStart) {
-  //audioStart.pause()
+  document.getElementById("controls").pause();
   paddleBotX = padleBotStart
   paddleSideY = padleSideStart
   point = points;
@@ -382,6 +410,10 @@ function swap() {
   let body = document.getElementsByTagName("body")[0];
   body.appendChild(canvas)
 }
+
+//function saveLocalStorage() {
+//  score
+//}
 
 
 
