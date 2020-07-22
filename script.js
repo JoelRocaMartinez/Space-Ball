@@ -27,8 +27,6 @@ let audioElement2 = new Audio('bounce_effect.mp3');
 let audioElement3 = new Audio('bounce_effect.mp3');
 let audioElement4 = new Audio('bounce_effect.mp3');
 
-// Start screen volume
-let audioStart = document.getElementById("controls");
 
 // Background Video
 let video = document.getElementById("myVideo");
@@ -273,8 +271,26 @@ function gameOver() {
   }
 }
 
+function reset() {
+  //Ball 1 coordenates
+  ball1X = 100;
+  ball1Y = 100;
+  // Ball 2 coordenates
+  ball2X = 200;
+  ball2Y = 200;
+  // Direction ball 1
+  dir1X = 1;
+  dir1Y = -1;
+  // Direction ball 2
+  dir2X = -1;
+  dir2Y = 1;
+  // Score
+  score = 0;
+  }
+
 // Restarts Game from main page
 function restartGame() {
+  audio.load();
   reset();
   div.remove();
   h1.remove();
@@ -348,23 +364,7 @@ start.querySelector("#hard").addEventListener("click", () => initiateGame(7, 100
 }
 
 
-function reset() {
-//Ball 1 coordenates
-ball1X = 100;
-ball1Y = 100;
-// Ball 2 coordenates
-ball2X = 200;
-ball2Y = 200;
-// Direction ball 1
-dir1X = 1;
-dir1Y = -1;
-// Direction ball 2
-dir2X = -1;
-dir2Y = 1;
-// Score
-score = 0;
 
-}
 
 function game() {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
