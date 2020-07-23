@@ -8,7 +8,12 @@ let intervalId = 0;
 // Save key for local storage of high score
 let saveKeyScore = "highscore";
 
-let highScore = document.querySelector(".score")
+let highScore;
+
+let highScoreList = document.querySelectorAll(".score")
+
+highScoreList.innerHTML = highScore;
+
 
 
 let isRightArrow = false;
@@ -33,16 +38,19 @@ let audioElement2 = new Audio('bounce_effect.mp3');
 let audioElement3 = new Audio('bounce_effect.mp3');
 let audioElement4 = new Audio('bounce_effect.mp3');
 
+audioElement1.volume = 0.2;
+audioElement2.volume = 0.2;
+audioElement3.volume = 0.2;
+audioElement4.volume = 0.2;
+
 // Audio Start
 let audioStart = new Audio("audio_start_screen.mp3")
 
-
+// Game Over effect
+let gameOverAudio = new Audio("game_over.mp3")
 
 // Background Video
 let video = document.getElementById("myVideo");
-
-// Game Over effect
-let gameOverAudio = new Audio("game_over.mp3")
 
 
 
@@ -282,11 +290,12 @@ function gameOver() {
     btn.appendChild(restart);
     body.appendChild(btn);
 
-     // CHECK HIGH SCORE
-     if (score > highScore) {
-      highScore = score;
-      localStorage.setItem(saveKeyScore, highScore);
-    }
+     // CHECK HIGH SCORE solo guarda 1 highscrore, tiene que ser un array 10
+     console.log("AFTER GAME ENDS")
+     console.log("previous highscore", highScore)
+     console.log("current score", score)
+     setHighScore()
+     console.log("current highScore after running setHighscore", highScore)
 
     document.querySelector("#restart").addEventListener("click", () => restartGame())
     
@@ -294,12 +303,19 @@ function gameOver() {
 }
 
 // Set High Score
-function setHighScore() {
+function getHighScore() {
   let scoreStr = localStorage.getItem(saveKeyScore)
   if (scoreStr == null) {
   highScore = 0;
   } else {
   highScore = parseInt(scoreStr);
+  } else if ()
+}
+
+function setHighScore() {
+  if (score > highScore) {
+    highScore = score;
+    localStorage.setItem(saveKeyScore, highScore);
   }
 }
 
@@ -324,6 +340,9 @@ function reset() {
 // Restarts Game from main page
 function restartGame() {
   audioStart.play();
+  getHighScore();
+  console.log("AFTER RESTART")
+  console.log("highscore after running getHighscore", highScore)
   reset();
   div.remove();
   h1.remove();
@@ -340,16 +359,16 @@ function restartGame() {
 
   <div class="highScores">
     <ol class="hallOfFame">Hall of Fame
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
+    <li class="score">${highScore}</li>
+    <li class="score"></li>
+    <li class="score"></li>
+    <li class="score"></li>
+    <li class="score"></li>
+    <li class="score"></li>
+    <li class="score"></li>
+    <li class="score"></li>
+    <li class="score"></li>
+    <li class="score"></li>
     </ol>
   </div>
 
@@ -412,11 +431,14 @@ function game() {
   ball1Collision()
   ball2Collision()
   gameOver()
-  setHighScore()
 }
 
 
 function initiateGame(speedBall, padleBotWidth, padleSideHeight, points, padleBotStart, padleSideStart) {
+  console.log("GAME STARTS")
+  console.log("default higscore", highScore)
+  getHighScore();
+  console.log("highscore after running getHighscore", highScore)
   audioStart.pause();
   audioStart.currentTime = 0;
   paddleBotX = padleBotStart
@@ -470,6 +492,7 @@ window.addEventListener('mouseover', () => {
     // audioStart.muted = true;
     audioStart.play();
     audioStart.volume = 0.05;
+    audioStart.loop;
     start();
   }
 })

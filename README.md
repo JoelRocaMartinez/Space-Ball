@@ -60,7 +60,7 @@ Git
 https://joelrocamartinez.github.io/Space-Pong
 
 Slides
-(URls for the project presentation (slides) Link Slides.com)
+https://docs.google.com/presentation/d/1-ZqCXx_eZTFyMdN3lUgWbzZQOc-APMns-HoVjnuUwdk/edit?usp=sharing
 
 
 
