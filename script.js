@@ -70,7 +70,7 @@ let paddleSideHeight = 0;
 // Ball 1
 function createBall1() {
   ctx.beginPath();
-  ctx.fillStyle = "#fffa94"
+  ctx.fillStyle = "#fffa94";
   ctx.arc(ball1X, ball1Y, ballRadius, 0, Math.PI*2);
   ctx.stroke();
   ctx.fill();
@@ -80,7 +80,7 @@ function createBall1() {
 // Ball 2
 function createBall2() {
   ctx.beginPath();
-  ctx.fillStyle = "#fffa94"
+  ctx.fillStyle = "#fffa94";
   ctx.arc(ball2X, ball2Y, ballRadius, 0, Math.PI*2);
   ctx.stroke();
   ctx.fill();
@@ -108,7 +108,7 @@ function createPaddleSide() {
 document.addEventListener('keydown', function(event){
   if (event.key === 'ArrowRight') {
       isRightArrow = true;
-      isLeftArrow = false
+      isLeftArrow = false;
   } 
   else if (event.key === 'ArrowLeft') {
       isLeftArrow = true; 
@@ -248,7 +248,7 @@ function gameOver() {
     body.appendChild(btn);
 
     // CHECK HIGH SCORE
-    setHighScore()
+    setHighScore();
   
     document.querySelector("#restart").addEventListener("click", () => restartGame())
 
@@ -280,12 +280,8 @@ function gameOver() {
     btn.appendChild(restart);
     body.appendChild(btn);
 
-     // CHECK HIGH SCORE solo guarda 1 highscrore, tiene que ser un array 10
-     console.log("AFTER GAME ENDS")
-     console.log("previous highscore", highScoreList)
-     console.log("current score", score)
-     setHighScore()
-     console.log("current highScore after running setHighscore", highScoreList)
+     // CHECK HIGH SCORE
+     setHighScore();
 
     document.querySelector("#restart").addEventListener("click", () => restartGame())
     
@@ -308,29 +304,18 @@ function getHighScore() {
 }
 
 function setHighScore() {
- 
   // highscore is an array
   if (highScoreList === undefined) { highScoreList = [0,0,0,0,0,0,0,0,0,0] }
   
-  
-  console.log("score", score)
-  console.log("highScoreList", highScoreList[9])
-
-
-
   if (score > highScoreList[9]) {
     console.log("hola")
     //highScore = score;
     highScoreList.splice(9)
     highScoreList.push(score)
-    console.log("highscore before sort", highScoreList)
     highScoreList.sort((a,b) => b - a);
-    console.log("highscore after sort", highScoreList)
     let tempArr = JSON.parse(JSON.stringify(highScoreList))
     localStorage.setItem(saveKeyScore, tempArr);
   }
-
-  
 }
 
 // Resets original values
@@ -355,8 +340,6 @@ function reset() {
 function restartGame() {
   audioStart.play();
   getHighScore();
-  console.log("AFTER RESTART")
-  console.log("highscore after running getHighscore", highScoreList)
   reset();
   div.remove();
   h1.remove();
@@ -431,7 +414,7 @@ start.querySelector("#hard").addEventListener("click", () => initiateGame(7, 100
 
 
 
-
+// Function that Creates the Game
 function game() {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
   createBall1()
@@ -447,12 +430,9 @@ function game() {
   gameOver()
 }
 
-
+// Function that Starts the Game
 function initiateGame(speedBall, padleBotWidth, padleSideHeight, points, padleBotStart, padleSideStart) {
-  console.log("GAME STARTS")
-  console.log("default higscore", highScoreList)
   getHighScore();
-  console.log("highscore after running getHighscore", highScoreList)
   audioStart.pause();
   audioStart.currentTime = 0;
   paddleBotX = padleBotStart
@@ -468,7 +448,7 @@ function initiateGame(speedBall, padleBotWidth, padleSideHeight, points, padleBo
 }
 
 
-
+// Function that Removes the Splash screen and Inserts the Canvas
 function swap() {
   let elem = document.querySelector("#instructions")
   elem.remove()
