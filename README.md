@@ -36,6 +36,7 @@ Game Modes:
 Data Structure:
 
 script.js
+* game()
 * createBall1()
 * createBall2()
 * createPaddleBot()
@@ -46,6 +47,7 @@ script.js
 * ball2Movement()
 * ball1Collision()
 * ball2Collision()
+* swap()
 * gameOver()
 * reset()
 * setHighScore()
