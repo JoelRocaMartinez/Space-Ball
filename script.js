@@ -8,13 +8,6 @@ let intervalId = 0;
 // Save key for local storage of high score
 let saveKeyScore = "highscore";
 
-let highScore;
-
-let highScoreList = document.querySelectorAll(".score")
-
-highScoreList.innerHTML = highScore;
-
-
 
 let isRightArrow = false;
 let isLeftArrow = false;
@@ -255,11 +248,8 @@ function gameOver() {
     body.appendChild(btn);
 
     // CHECK HIGH SCORE
-    if (score > highScore) {
-      highScore = score;
-      localStorage.setItem(saveKeyScore, highScore);
-    }
-
+    setHighScore()
+  
     document.querySelector("#restart").addEventListener("click", () => restartGame())
 
   } else if (ball1Y >= canvas.height || ball2Y >= canvas.height) {
@@ -292,31 +282,55 @@ function gameOver() {
 
      // CHECK HIGH SCORE solo guarda 1 highscrore, tiene que ser un array 10
      console.log("AFTER GAME ENDS")
-     console.log("previous highscore", highScore)
+     console.log("previous highscore", highScoreList)
      console.log("current score", score)
      setHighScore()
-     console.log("current highScore after running setHighscore", highScore)
+     console.log("current highScore after running setHighscore", highScoreList)
 
     document.querySelector("#restart").addEventListener("click", () => restartGame())
     
   }
 }
 
+
+let highScoreList = undefined;
+
 // Set High Score
 function getHighScore() {
   let scoreStr = localStorage.getItem(saveKeyScore)
   if (scoreStr == null) {
-  highScore = 0;
+  highScoreList = undefined;
   } else {
-  highScore = parseInt(scoreStr);
-  } else if ()
+    let highscoreStr = JSON.parse(JSON.stringify(scoreStr))
+    highScoreListStr = highscoreStr.split(",")
+    highScoreList = highScoreListStr.map(e => Number(e))
+  }
 }
 
 function setHighScore() {
-  if (score > highScore) {
-    highScore = score;
-    localStorage.setItem(saveKeyScore, highScore);
+ 
+  // highscore is an array
+  if (highScoreList === undefined) { highScoreList = [0,0,0,0,0,0,0,0,0,0] }
+  
+  
+  console.log("score", score)
+  console.log("highScoreList", highScoreList[9])
+
+
+
+  if (score > highScoreList[9]) {
+    console.log("hola")
+    //highScore = score;
+    highScoreList.splice(9)
+    highScoreList.push(score)
+    console.log("highscore before sort", highScoreList)
+    highScoreList.sort((a,b) => b - a);
+    console.log("highscore after sort", highScoreList)
+    let tempArr = JSON.parse(JSON.stringify(highScoreList))
+    localStorage.setItem(saveKeyScore, tempArr);
   }
+
+  
 }
 
 // Resets original values
@@ -342,7 +356,7 @@ function restartGame() {
   audioStart.play();
   getHighScore();
   console.log("AFTER RESTART")
-  console.log("highscore after running getHighscore", highScore)
+  console.log("highscore after running getHighscore", highScoreList)
   reset();
   div.remove();
   h1.remove();
@@ -359,16 +373,16 @@ function restartGame() {
 
   <div class="highScores">
     <ol class="hallOfFame">Hall of Fame
-    <li class="score">${highScore}</li>
-    <li class="score"></li>
-    <li class="score"></li>
-    <li class="score"></li>
-    <li class="score"></li>
-    <li class="score"></li>
-    <li class="score"></li>
-    <li class="score"></li>
-    <li class="score"></li>
-    <li class="score"></li>
+    <li class="score">${highScoreList[0]}</li>
+    <li class="score">${highScoreList[1]}</li>
+    <li class="score">${highScoreList[2]}</li>
+    <li class="score">${highScoreList[3]}</li>
+    <li class="score">${highScoreList[4]}</li>
+    <li class="score">${highScoreList[5]}</li>
+    <li class="score">${highScoreList[6]}</li>
+    <li class="score">${highScoreList[7]}</li>
+    <li class="score">${highScoreList[8]}</li>
+    <li class="score">${highScoreList[9]}</li>
     </ol>
   </div>
 
@@ -436,9 +450,9 @@ function game() {
 
 function initiateGame(speedBall, padleBotWidth, padleSideHeight, points, padleBotStart, padleSideStart) {
   console.log("GAME STARTS")
-  console.log("default higscore", highScore)
+  console.log("default higscore", highScoreList)
   getHighScore();
-  console.log("highscore after running getHighscore", highScore)
+  console.log("highscore after running getHighscore", highScoreList)
   audioStart.pause();
   audioStart.currentTime = 0;
   paddleBotX = padleBotStart
