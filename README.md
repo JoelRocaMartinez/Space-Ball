@@ -53,6 +53,8 @@ script.js
 * setHighScore()
 * getHighScore()
 * restartGame()
+* countdown()
+* freeze()
 
 
 Tasks

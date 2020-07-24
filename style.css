@@ -163,3 +163,12 @@
     left: 43.5%;
     top: 70%;
 }
+
+#countDown {
+    position: fixed;
+    color: white;
+    font-size: 32px;
+    left: 47.5%;
+    top: 10%;
+    font-family: play;
+}

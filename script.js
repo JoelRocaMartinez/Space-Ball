@@ -8,6 +8,15 @@ let intervalId = 0;
 // Save key for local storage of high score
 let saveKeyScore = "highscore";
 
+// Variables to create game over elements
+let h1;
+let div;
+let btn;
+let body = document.getElementsByTagName("body")[0];
+
+// High Score variable
+let highScoreList = undefined;
+
 
 let isRightArrow = false;
 let isLeftArrow = false;
@@ -212,16 +221,18 @@ function printScore(){
     ctx.fillText('Score: '+ score, 10, 20);
 }
 
-let h1;
-let div;
-let btn;
-let body = document.getElementsByTagName("body")[0];
 
 // Game Over
 function gameOver() {
   if (ball1X >= canvas.width || ball2X >= canvas.width) {
+    let elem2 = document.querySelector("#countDown")
+    elem2.remove()
     clearInterval(intervalId);
     gameOverAudio.play();
+    audioElement1.muted = !audioElement1.muted
+    audioElement2.muted = !audioElement2.muted
+    audioElement3.muted = !audioElement3.muted
+    audioElement4.muted = !audioElement4.muted
     
     let finish = document.querySelector("#myCanvas");
     finish.remove();
@@ -253,8 +264,14 @@ function gameOver() {
     document.querySelector("#restart").addEventListener("click", () => restartGame())
 
   } else if (ball1Y >= canvas.height || ball2Y >= canvas.height) {
+    let elem2 = document.querySelector("#countDown")
+    elem2.remove()
     clearInterval(intervalId);
     gameOverAudio.play();
+    audioElement1.muted = !audioElement1.muted
+    audioElement2.muted = !audioElement2.muted
+    audioElement3.muted = !audioElement3.muted
+    audioElement4.muted = !audioElement4.muted
     
     let finish = document.querySelector("#myCanvas");
     finish.remove();
@@ -289,7 +306,7 @@ function gameOver() {
 }
 
 
-let highScoreList = undefined;
+
 
 // Set High Score
 function getHighScore() {
@@ -308,7 +325,6 @@ function setHighScore() {
   if (highScoreList === undefined) { highScoreList = [0,0,0,0,0,0,0,0,0,0] }
   
   if (score > highScoreList[9]) {
-    console.log("hola")
     //highScore = score;
     highScoreList.splice(9)
     highScoreList.push(score)
@@ -334,6 +350,11 @@ function reset() {
   dir2Y = 1;
   // Score
   score = 0;
+  audioElement1.muted = false
+  audioElement2.muted = false
+  audioElement3.muted = false
+  audioElement4.muted = false
+
   }
 
 // Restarts Game from main page
@@ -414,6 +435,14 @@ start.querySelector("#hard").addEventListener("click", () => initiateGame(7, 100
 
 
 
+// Freezes the beggining screen
+function freeze() {
+  ball1Movement()
+  ball2Movement()
+  ball1Collision()
+  ball2Collision()
+}
+
 // Function that Creates the Game
 function game() {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -423,15 +452,46 @@ function game() {
   createPaddleSide()
   paddleMovement()
   printScore()
-  ball1Movement()
-  ball2Movement()
-  ball1Collision()
-  ball2Collision()
   gameOver()
+  setTimeout(freeze, 4000)
 }
+
+
+// Function counted down
+function countdown() {
+  const startingMinutes = 0.05
+  let time = startingMinutes * 60
+
+  let countdownEl = document.createElement("div");
+  countdownEl.id = "countDown";
+  body.appendChild(countdownEl);
+
+  let intervalId2 = setInterval(updatingCountdown, 1000)
+
+  
+// Function Update Countdown
+  function updatingCountdown() {
+    let seconds = time % 60;
+
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    countdownEl.innerHTML = `${seconds}`;
+    time--;
+
+    if (seconds <= 0) {
+      clearInterval(intervalId2)
+      document.getElementById("countDown").textContent = "";
+    }
+  }
+   
+}
+
+
 
 // Function that Starts the Game
 function initiateGame(speedBall, padleBotWidth, padleSideHeight, points, padleBotStart, padleSideStart) {
+  countdown();
+  reset();
   getHighScore();
   audioStart.pause();
   audioStart.currentTime = 0;
@@ -486,7 +546,7 @@ window.addEventListener('mouseover', () => {
     // audioStart.muted = true;
     audioStart.play();
     audioStart.volume = 0.05;
-    audioStart.loop;
+    audioStart.loop = true;
     start();
   }
 })
